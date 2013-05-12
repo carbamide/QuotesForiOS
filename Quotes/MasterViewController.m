@@ -11,15 +11,10 @@
 
 @implementation MasterViewController
 
- // Uncomment this for Universal Apps
- - (void)awakeFromNib
- {
- if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
- self.clearsSelectionOnViewWillAppear = NO;
- self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
- }
- [super awakeFromNib];
- }
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+}
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -27,221 +22,198 @@
         // Customize the table
         
         // The className to query on
-        self.className = @"Quote";
-        
-        // The key of the PFObject to display in the label of the default cell style
-        self.textKey = @"by";
-        
-        // Uncomment the following line to specify the key of a PFFile on the PFObject to display in the imageView of the default cell style
-        // self.imageKey = @"image";
-        
-        // Whether the built-in pull-to-refresh is enabled
-        self.pullToRefreshEnabled = YES;
-        
-        // Whether the built-in pagination is enabled
-        self.paginationEnabled = YES;
-        
-        // The number of objects to show per page
-        self.objectsPerPage = 25;
+        [self setClassName:@"Quote"];
+        [self setTextKey:@"by"];
+        [self setPullToRefreshEnabled:YES];
+        [self setPaginationEnabled:YES];
+        [self setObjectsPerPage:25];
     }
     return self;
 }
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+- (PFQuery *)queryForTable
+{
+    PFQuery *query = [[PFQuery alloc] initWithClassName:@"Quote"];
     
-    // Release any cached data, images, etc that aren't in use.
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    
+    return query;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
 }
 
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
-    // Uncomment the following line for Universal Apps
-    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self loadObjects]; // Refreshes the table
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self loadObjects];
+    
     [super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
+    
+    if (![PFUser currentUser]) {
+        PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
+        [logInViewController setDelegate:self];
+        
+        // Create the sign up view controller
+        PFSignUpViewController *signUpViewController = [[PFSignUpViewController alloc] init];
+        [signUpViewController setDelegate:self];
+        
+        [logInViewController setSignUpController:signUpViewController];
+        
+        [self presentViewController:logInViewController animated:YES completion:NULL];
+    }
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated
+{
     [super viewDidDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 
 #pragma mark - PFQueryTableViewController
 
-- (void)objectsWillLoad {
+- (void)objectsWillLoad
+{
     [super objectsWillLoad];
-    
-    // This method is called before a PFQuery is fired to get more objects
 }
 
-- (void)objectsDidLoad:(NSError *)error {
+- (void)objectsDidLoad:(NSError *)error
+{
     [super objectsDidLoad:error];
-    
-    // This method is called every time objects are loaded from Parse via the PFQuery
 }
 
-/*
- // Override to customize what kind of query to perform on the class. The default is to query for
- // all objects ordered by createdAt descending.
- - (PFQuery *)queryForTable {
- PFQuery *query = [PFQuery queryWithClassName:self.className];
- 
- // If Pull To Refresh is enabled, query against the network by default.
- if (self.pullToRefreshEnabled) {
- query.cachePolicy = kPFCachePolicyNetworkOnly;
- }
- 
- // If no objects are loaded in memory, we look to the cache first to fill the table
- // and then subsequently do a query against the network.
- if (self.objects.count == 0) {
- query.cachePolicy = kPFCachePolicyCacheThenNetwork;
- }
- 
- [query orderByDescending:@"createdAt"];
- 
- return query;
- }
- */
 
-
-// Override to customize the look of a cell representing an object. The default is to display
-// a UITableViewCellStyleDefault style cell with the label being the textKey in the object,
-// and the imageView being the imageKey in the object.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-    // If you want a custom cell, create a new subclass of PFTableViewCell, set the cell identifier in IB, then change this string to match
-    // You can access any IBOutlets declared in the .h file from here and set the values accordingly
-    // "Cell" is the default cell identifier in a new Master-Detail Project
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
+{
     static NSString *CellIdentifier = @"Cell";
     
     PFTableViewCell *cell = (PFTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     if (cell == nil) {
         cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell
-    cell.textLabel.text = [object objectForKey:self.textKey];
-    //cell.imageView.file = [object objectForKey:self.imageKey];
+    [[cell textLabel] setText:[object objectForKey:[self textKey]]];
     
     return cell;
 }
 
-
-/*
- // Override if you need to change the ordering of objects in the table.
- - (PFObject *)objectAtIndex:(NSIndexPath *)indexPath {
- return [self.objects objectAtIndex:indexPath.row];
- }
- */
-
-/*
- // Override to customize the look of the cell that allows the user to load the next page of objects.
- // The default implementation is a UITableViewCellStyleDefault cell with simple labels.
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath {
- static NSString *CellIdentifier = @"NextPage";
- 
- UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
- 
- if (cell == nil) {
- cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
- }
- 
- cell.selectionStyle = UITableViewCellSelectionStyleNone;
- cell.textLabel.text = @"Load more...";
- 
- return cell;
- }
- */
-
-#pragma mark - UITableViewDataSource
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the object from Parse and reload the table view
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, and save it to Parse
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-#pragma mark - UITableViewDelegate
-
-
- // Uncomment this section for Universal Apps
-
- - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
- PFObject *object = [self objectAtIndexPath:indexPath];
- self.detailViewController.detailItem = object;
- }
- }
-
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // "showDetail" is the default segue identifier in a new Master-Detail Project for Table Cell -> Detail View
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        // Pass the PFObject at this row to the detail view
+        
         PFObject *object = [self objectAtIndexPath:indexPath];
+        
         [[segue destinationViewController] setDetailItem:object];
     }
 }
+
+#pragma mark - PFLogInViewControllerDelegate
+
+- (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
+    if (username && password && [username length] && [password length]) {
+        return YES;
+    }
+    
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil)
+                                message:NSLocalizedString(@"Make sure you fill out all of the information!", nil)
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                      otherButtonTitles:nil] show];
+    return NO;
+}
+
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error
+{
+    NSLog(@"Failed to log in...");
+}
+
+- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController
+{
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+
+#pragma mark - PFSignUpViewControllerDelegate
+
+- (BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info
+{
+    BOOL informationComplete = YES;
+    
+    for (id key in info) {
+        NSString *field = [info objectForKey:key];
+        if (!field || ![field length]) {
+            informationComplete = NO;
+            break;
+        }
+    }
+    
+    if (!informationComplete) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil)
+                                    message:NSLocalizedString(@"Make sure you fill out all of the information!", nil)
+                                   delegate:nil
+                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                          otherButtonTitles:nil] show];
+    }
+    
+    return informationComplete;
+}
+
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error
+{
+    NSLog(@"Failed to sign up...");
+}
+
+- (void)signUpViewControllerDidCancelSignUp:(PFSignUpViewController *)signUpController
+{
+    NSLog(@"User dismissed the signUpViewController");
+}
+
+
+#pragma mark - ()
+
+- (IBAction)logOutButtonTapAction:(id)sender
+{
+    [PFUser logOut];
+}
+
 @end

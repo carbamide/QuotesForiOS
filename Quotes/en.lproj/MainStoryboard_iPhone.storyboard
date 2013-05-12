@@ -48,7 +48,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="By" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KA5-Se-pw0">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KA5-Se-pw0">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="188" id="Yyn-Pb-hIW"/>
                                 </constraints>
@@ -58,29 +58,51 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSm-IV-RYf">
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="HjE-2Y-nbe"/>
+                                    <constraint firstAttribute="height" constant="358" id="ADZ-R6-DXt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Author:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1a-jb-McK">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Source:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VS3-Rl-c8a">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="41T-Wi-7cJ">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NSm-IV-RYf" firstAttribute="top" secondItem="O4O-Er-QyT" secondAttribute="top" constant="76" id="555-bX-qgQ"/>
-                            <constraint firstItem="NXL-8W-mUl" firstAttribute="top" secondItem="O4O-Er-QyT" secondAttribute="top" constant="50" id="Cx5-7d-3Ze"/>
-                            <constraint firstItem="KA5-Se-pw0" firstAttribute="top" secondItem="O4O-Er-QyT" secondAttribute="top" constant="140" id="EGA-Wv-34A"/>
-                            <constraint firstItem="NSm-IV-RYf" firstAttribute="centerX" secondItem="KA5-Se-pw0" secondAttribute="centerX" type="default" id="MRn-Nx-RoK"/>
+                            <constraint firstItem="NXL-8W-mUl" firstAttribute="top" secondItem="O4O-Er-QyT" secondAttribute="top" constant="144" id="HCk-O2-UeY"/>
+                            <constraint firstItem="z1a-jb-McK" firstAttribute="leading" secondItem="O4O-Er-QyT" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="LOj-y4-u3v"/>
+                            <constraint firstItem="VS3-Rl-c8a" firstAttribute="leading" secondItem="O4O-Er-QyT" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="RhM-PI-b3o"/>
                             <constraint firstItem="5uV-q2-DE2" firstAttribute="leading" secondItem="O4O-Er-QyT" secondAttribute="leading" type="default" id="UcN-1U-cts"/>
-                            <constraint firstItem="NXL-8W-mUl" firstAttribute="leading" secondItem="O4O-Er-QyT" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="WWz-TR-ABH"/>
-                            <constraint firstItem="NSm-IV-RYf" firstAttribute="leading" secondItem="O4O-Er-QyT" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="YvT-AS-GRp"/>
+                            <constraint firstItem="NSm-IV-RYf" firstAttribute="leading" secondItem="O4O-Er-QyT" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Z3L-r3-QDM"/>
+                            <constraint firstAttribute="trailing" secondItem="NSm-IV-RYf" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="aML-8o-KDy"/>
+                            <constraint firstItem="z1a-jb-McK" firstAttribute="top" secondItem="O4O-Er-QyT" secondAttribute="top" constant="72" id="ak0-9Q-b26"/>
+                            <constraint firstItem="41T-Wi-7cJ" firstAttribute="leading" secondItem="KA5-Se-pw0" secondAttribute="leading" type="default" id="an3-85-9lg"/>
+                            <constraint firstAttribute="trailing" secondItem="KA5-Se-pw0" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="bJy-1J-88c"/>
+                            <constraint firstItem="NXL-8W-mUl" firstAttribute="leading" secondItem="O4O-Er-QyT" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="bi8-KY-YYo"/>
+                            <constraint firstItem="41T-Wi-7cJ" firstAttribute="top" secondItem="KA5-Se-pw0" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="emH-2b-kmt"/>
+                            <constraint firstItem="KA5-Se-pw0" firstAttribute="top" secondItem="O4O-Er-QyT" secondAttribute="top" constant="68" id="fG0-bc-Xd4"/>
                             <constraint firstItem="5uV-q2-DE2" firstAttribute="trailing" secondItem="O4O-Er-QyT" secondAttribute="trailing" type="default" id="g2e-O6-8du"/>
+                            <constraint firstAttribute="bottom" secondItem="NSm-IV-RYf" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="hvc-w4-Ggv"/>
+                            <constraint firstItem="VS3-Rl-c8a" firstAttribute="top" secondItem="O4O-Er-QyT" secondAttribute="top" constant="110" id="iB1-R0-QkP"/>
+                            <constraint firstAttribute="trailing" secondItem="41T-Wi-7cJ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="lfZ-sk-496"/>
                             <constraint firstItem="5uV-q2-DE2" firstAttribute="top" secondItem="O4O-Er-QyT" secondAttribute="top" type="default" id="oVb-2F-G5s"/>
-                            <constraint firstAttribute="trailing" secondItem="NSm-IV-RYf" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="y9S-Us-ZPT"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="attribution" destination="KA5-Se-pw0" id="FZg-fg-Ug0"/>
                         <outlet property="quoteText" destination="NSm-IV-RYf" id="6rj-Zv-dfU"/>
+                        <outlet property="source" destination="41T-Wi-7cJ" id="7Hf-As-fcW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZlP-uA-aTU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -170,8 +192,30 @@
         </scene>
     </scenes>
     <classes>
+        <class className="AddQuoteViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddQuoteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="done:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="attribution" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="quoteText" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="source" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="DetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MasterViewController" superclassName="PFQueryTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MasterViewController.h"/>
+        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PFQueryTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PFQueryTableViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

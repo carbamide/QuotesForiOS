@@ -11,7 +11,7 @@
 
 @class DetailViewController;
 
-@interface MasterViewController : PFQueryTableViewController
+@interface MasterViewController : PFQueryTableViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 

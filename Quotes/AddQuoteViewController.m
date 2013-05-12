@@ -11,8 +11,9 @@
 
 @interface AddQuoteViewController ()
 
-@property (nonatomic, strong) IBOutlet UITextField *attribution;
-@property (nonatomic, strong) IBOutlet UITextView *quoteText;
+@property (strong, nonatomic) IBOutlet UITextField *attribution;
+@property (strong, nonatomic) IBOutlet UITextView *quoteText;
+@property (strong, nonatomic) IBOutlet UITextField *source;
 
 @end
 
@@ -22,7 +23,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
@@ -30,23 +31,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    [[[self quoteText] layer] setCornerRadius:8];
+    [[[self quoteText] layer] setBorderColor:[[UIColor darkGrayColor] CGColor]];
+    [[[self quoteText] layer] setBorderWidth:1];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
--(IBAction)done:(id)sender {
+-(IBAction)done:(id)sender
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(IBAction)save:(id)sender {
+-(IBAction)save:(id)sender
+{
     PFObject *quote = [PFObject objectWithClassName:@"Quote"];
+    
     [quote setObject:[[self attribution] text] forKey:@"by"];
     [quote setObject:[[self quoteText] text] forKey:@"quoteText"];
+    [quote setObject:[[self source] text] forKey:@"sourceText"];
+    [quote setObject:[PFUser currentUser] forKey:@"user"];
     
     [quote saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
