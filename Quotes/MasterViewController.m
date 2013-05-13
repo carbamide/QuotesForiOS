@@ -8,6 +8,8 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "Helpers.h"
+#import "QuotesCell.h"
 
 @implementation MasterViewController
 
@@ -51,6 +53,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[self tableView] setBackgroundColor:[UIColor underPageBackgroundColor]];
 }
 
 - (void)viewDidUnload {
@@ -110,19 +114,23 @@
     [super objectsDidLoad:error];
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 88;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
     static NSString *CellIdentifier = @"Cell";
     
-    PFTableViewCell *cell = (PFTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    QuotesCell *cell = (QuotesCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[QuotesCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    [[cell textLabel] setText:[object objectForKey:[self textKey]]];
-    
+    [[cell textLabel] setText:[object objectForKey:@"quoteText"]];
+    [[cell detailTextLabel] setText:[object objectForKey:[self textKey]]];
     return cell;
 }
 

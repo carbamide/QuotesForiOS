@@ -1,0 +1,13 @@
+//
+//  ShadowTableView.h
+//  Quotes
+//
+//  Created by Josh Barrow on 4/29/13.
+//  Copyright (c) 2013 Jukaela Enterprises. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ShadowTableView : UITableView
+
+@end

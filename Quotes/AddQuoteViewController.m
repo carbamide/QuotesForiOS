@@ -35,6 +35,8 @@
     [[[self quoteText] layer] setCornerRadius:8];
     [[[self quoteText] layer] setBorderColor:[[UIColor darkGrayColor] CGColor]];
     [[[self quoteText] layer] setBorderWidth:1];
+    
+    [[self view] setBackgroundColor:[UIColor underPageBackgroundColor]];
 }
 
 - (void)didReceiveMemoryWarning

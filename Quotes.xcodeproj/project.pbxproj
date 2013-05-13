@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29AEFE95174053FC0087DA18 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AEFE94174053FC0087DA18 /* Helpers.m */; };
+		29AEFF6917406DF20087DA18 /* QuotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AEFF6817406DF20087DA18 /* QuotesCell.m */; };
+		29AEFF6C17406DFC0087DA18 /* ShadowTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AEFF6B17406DFB0087DA18 /* ShadowTableView.m */; };
 		29DB182B1740365200CF4F8C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DB18291740365200CF4F8C /* MainStoryboard_iPhone.storyboard */; };
 		29DB182E1740366500CF4F8C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29DB182C1740366500CF4F8C /* InfoPlist.strings */; };
 		FCA7AAC8169E044800D4B2F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCA7AAC7169E044800D4B2F2 /* UIKit.framework */; };
@@ -37,6 +40,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29AEFE93174053FC0087DA18 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		29AEFE94174053FC0087DA18 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
+		29AEFF6717406DF20087DA18 /* QuotesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotesCell.h; sourceTree = "<group>"; };
+		29AEFF6817406DF20087DA18 /* QuotesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotesCell.m; sourceTree = "<group>"; };
+		29AEFF6A17406DFB0087DA18 /* ShadowTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowTableView.h; sourceTree = "<group>"; };
+		29AEFF6B17406DFB0087DA18 /* ShadowTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowTableView.m; sourceTree = "<group>"; };
 		29C875DF174036A7005B6CBF /* Quotes-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Quotes-Info.plist"; sourceTree = "<group>"; };
 		29DB182A1740365200CF4F8C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		29DB182D1740366500CF4F8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -101,6 +110,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29AEFF661740547D0087DA18 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		29AEFF6D17406EA40087DA18 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				29AEFF6717406DF20087DA18 /* QuotesCell.h */,
+				29AEFF6817406DF20087DA18 /* QuotesCell.m */,
+				29AEFF6A17406DFB0087DA18 /* ShadowTableView.h */,
+				29AEFF6B17406DFB0087DA18 /* ShadowTableView.m */,
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
 		29E37032174031E2002F1DED /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +205,8 @@
 				29E37032174031E2002F1DED /* Singleton */,
 				29E37033174031E7002F1DED /* User Interface */,
 				29E37034174031EF002F1DED /* View Controllers */,
+				29AEFF6D17406EA40087DA18 /* Table */,
+				29AEFF661740547D0087DA18 /* Assets */,
 				FCA7AACE169E044800D4B2F2 /* Supporting Files */,
 			);
 			path = Quotes;
@@ -193,6 +222,8 @@
 				FCA7AAD9169E044800D4B2F2 /* Default.png */,
 				FCA7AADB169E044800D4B2F2 /* Default@2x.png */,
 				FCA7AADD169E044800D4B2F2 /* Default-568h@2x.png */,
+				29AEFE93174053FC0087DA18 /* Helpers.h */,
+				29AEFE94174053FC0087DA18 /* Helpers.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -269,6 +300,9 @@
 				FCA7AAE7169E044800D4B2F2 /* MasterViewController.m in Sources */,
 				FCA7AAEA169E044800D4B2F2 /* DetailViewController.m in Sources */,
 				FCA7AB0E169E097100D4B2F2 /* AddQuoteViewController.m in Sources */,
+				29AEFE95174053FC0087DA18 /* Helpers.m in Sources */,
+				29AEFF6917406DF20087DA18 /* QuotesCell.m in Sources */,
+				29AEFF6C17406DFC0087DA18 /* ShadowTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
